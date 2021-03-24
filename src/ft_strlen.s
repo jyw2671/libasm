@@ -9,7 +9,7 @@ _ft_strlen:
     jmp     loop
 
 loop:
-    cmp     BYTE[rdi + rax], 0      ; s[i]  ;
+    cmp     BYTE[rdi + rax], 0      ; s[i]
     je      return
     inc     rax
     jmp     loop

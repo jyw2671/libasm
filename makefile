@@ -6,7 +6,7 @@
 #    By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 16:48:15 by yjung             #+#    #+#              #
-#    Updated: 2021/03/23 20:41:06 by yjung            ###   ########.fr        #
+#    Updated: 2021/03/24 22:33:43 by yjung            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,23 +30,26 @@ OBJ_DIR = ./obj
 SRCS = $(wildcard $(SRC_DIR)/*.s)
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.s=.o)))
 
+vpath %.s $(SRC_DIR)
+
 all : $(NAME)
 
 $(OBJ_DIR) :
 	mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.s
-	$(ASMC) $(ASMFLAGS) -s $< -o $@
+$(OBJ_DIR)/%.o : %.s | $(OBJ_DIR)
+	@$(ASMC) $(ASMFLAGS) $< -o $@
 
 $(NAME) : $(OBJS)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 
 clean :
-	$(RM) $(OBJ)
+	$(RM) $(OBJS)
 	rm -rf $(OBJ_DIR)
 
 fclean : clean
 	$(RM) $(NAME)
+	@rm a.out
 
 #bonus : $(NAME)
 
@@ -57,21 +60,17 @@ TEST_SRC_DIR = ./test_src
 TEST_OBJ_DIR = ./test_obj
 
 TEST_INC = $(wildcard $(TEST_INC_DIR)/*.h)
-TEST_SRCS = $(wildcard $(TEST_SRC_DIR)/*.s)
-TEST_OBJS = $(addprefix $(TEST_OBJ_DIR)/, $(notdir $(TEST_SRCS:.c=.o)))
+TEST_SRCS = $(wildcard $(TEST_SRC_DIR)/*.c)
 
-$(TEST_OBJ_DIR) :
-	mkdir -p $(TEST_OBJ_DIR)
+vpath %.c ${TEST_SRC_DIR}
 
-$(TEST_OBJ_DIR)/%.o : $(TEST_SRC_DIR)/%.c
-	$(CC) $(CFLAGS)  -I $(TEST_INC) -c $< -o $@ -L./ -lasm
 
 test : $(NAME) $(TEST_OBJS)
-	@$(CC) $(CFLAGS) $(TEST_OBJS) -o $(NAME) $(OBJS_B)
+	$(CC) $(CFLAGS) $(NAME) -I $(TEST_INC_DIR) -o a.out $(TEST_SRCS)
+	@./a.out
 
-test_clean : clean
+test_clean : fclean
 	$(RM) $(RMFLAGS) $(TEST_OBJ_DIR)
+	@rm a.out
 
-test_fclean : fclean test_clean
-
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test test_clean

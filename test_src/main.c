@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:32:33 by yjung             #+#    #+#             */
-/*   Updated: 2021/03/24 19:21:17 by yjung            ###   ########.fr       */
+/*   Updated: 2021/03/25 14:54:44 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char	*g_string[10] = {
 	"string test",
 	"abcdefg",
 	"42seoul",
-	"jaeskim",
-	"badge42",
+	"yjung",
+	"seoul42",
 	"a b c d e f g",
 	"123456789",
 	"42NetWork",
@@ -36,10 +36,12 @@ void	putstr_slow(char *s)
 
 int	main(void)
 {
-	system("clear");
+	// system("clear");
+	// 역할? -> 
 	putstr_slow("🤩 TEST Libasm!!!! 🚀\n");
 	ft_strlen_test();
 	ft_strcpy_test();
 	ft_strcmp_test();
+	ft_write_test();
 	return (0);
 }

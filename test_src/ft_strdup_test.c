@@ -1,49 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp_test.c                                   :+:      :+:    :+:   */
+/*   ft_strdup_test.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/24 19:19:30 by yjung             #+#    #+#             */
-/*   Updated: 2021/03/29 17:58:38 by yjung            ###   ########.fr       */
+/*   Created: 2021/03/29 19:24:34 by yjung             #+#    #+#             */
+/*   Updated: 2021/03/29 19:25:06 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
-static void	do_test(char *s1, char *s2)
+static void	do_test(char *s)
 {
-	int	ori;
-	int	ft;
+	char	*dup_s;
 
-	printf("try... ft_strcmp(\"%s\", \"%s\");\n", s1, s2);
-	ori = strcmp(s1, s2);
-	ft = ft_strcmp(s1, s2);
-	printf("	ori: %d, ft: %d\n", ori, ft);
-	if ((ori == 0 && ft != 0) || (ori < 0 && ft > 0) || (ori > 0 && ft < 0))
+	printf("try... ft_strdup(\"%s\");\n", s);
+	dup_s = ft_strdup(s);
+	if (strcmp(dup_s, s) != 0)
 	{
-		printf("KO: diff ori: %d, ft: %d\n", ori, ft);
+		printf("KO: diff src: %s, dup: %s\n", s, dup_s);
+		free(dup_s);
 		exit(1);
 	}
+	free(dup_s);
 }
 
-void	ft_strcmp_test(void)
+void	ft_strdup_test(void)
 {
 	int	i;
 
 	printf("===================================================\n");
-	printf("ft_strcmp_test();\n");
+	printf("ft_strdup_test();\n");
 	i = 0;
 	while (i < 10)
-	{
-		do_test(g_string[i], g_string[9 - i]);
-		do_test(g_string[i], g_string[i]);
-		++i;
-	}
-	do_test("", "");
-	do_test("hello", "");
-	do_test("", "hello");
-	do_test("Hello", "lorem teste");
+		do_test(g_string[i++]);
 	printf("SUCCESS!\n");
 }

@@ -1,6 +1,7 @@
 section .text
     global _ft_write
     extern ___error
+; ssize_t write(int fd, const void *buf, size_t count);
 ; 프로토타입은 (fd == rdi, buf == rsi, size == rdx) 전달되어서 MOV 안 해줘도 됨
 
 _ft_write:

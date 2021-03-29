@@ -6,44 +6,46 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 15:28:36 by yjung             #+#    #+#             */
-/*   Updated: 2021/03/25 15:31:49 by yjung            ###   ########.fr       */
+/*   Updated: 2021/03/29 19:59:26 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
-static void	do_test(int fd, char *s)
+static void	do_test(char *path)
 {
-	int	ori[2];
-	int	ft[2];
-	int	s_len;
+	char	buf[2][100];
+	int		ori[2];
+	int		ft[2];
+	int		fd;
 
-	s_len = strlen(s);
-	printf("\ntry... ft_read(%d, \"%s\", %d);\n", fd, s, s_len);
-	ori[0] = read(fd, s, s_len);
+	printf("try... ft_read(fd, \"%s\", 10);\n", path);
+	memset(&buf, 0, sizeof(char [2][100]));
+	fd = open(path, O_RDONLY);
+	ori[0] = read(fd, buf[0], 10);
 	ori[1] = errno;
-	write(1, " , ", 3);
-	ft[0] = ft_read(fd, s, s_len);
+	close(fd);
+	fd = open(path, O_RDONLY);
+	ft[0] = ft_read(fd, buf[1], 10);
 	ft[1] = errno;
-	if ((ori[0] != ft[0]) || (ori[1] != ft[1]))
+	close(fd);
+	if ((strcmp(buf[1], buf[0]) != 0) || (ori[0] != ft[0]) || (ori[1] != ft[1]))
 	{
-		printf("\nKO: diff ori: %d (___errno : %d), ft: %d (___errno : %d)\n", \
-			ori[0], ori[1], ft[0], ft[1]);
+		printf("KO: diff \n");
+		printf("ori char: %s, ret: %d, errno: %d\n", buf[0], ori[0], ori[1]);
+		printf("ft char: %s, ret: %d, errno: %d\n", buf[1], ft[0], ft[1]);
 		exit(1);
 	}
 }
 
 void	ft_read_test(void)
 {
-	int	i;
-
 	printf("===================================================\n");
-	printf("testing ft_read();\n");
-	i = 0;
-	while (i < 10)
-	{
-		do_test(i, g_string[i]);
-		++i;
-	}
-	printf("\nSUCCESS!\n");
+	printf("ft_read_test();\n");
+	do_test("./test.txt");
+	do_test("./Makefile");
+	do_test("./readme.md");
+	do_test("not exist file");
+	do_test("42424242");
+	printf("SUCCESS!\n");
 }

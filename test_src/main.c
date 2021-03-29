@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:32:33 by yjung             #+#    #+#             */
-/*   Updated: 2021/03/25 14:54:44 by yjung            ###   ########.fr       */
+/*   Updated: 2021/03/29 19:52:12 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ void	putstr_slow(char *s)
 
 int	main(void)
 {
-	// system("clear");
-	// 역할? -> 
+	system("clear");
 	putstr_slow("🤩 TEST Libasm!!!! 🚀\n");
 	ft_strlen_test();
 	ft_strcpy_test();
 	ft_strcmp_test();
 	ft_write_test();
+	ft_read_test();
+	ft_strdup_test();
 	return (0);
 }

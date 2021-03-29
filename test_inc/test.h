@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:31:24 by yjung             #+#    #+#             */
-/*   Updated: 2021/03/25 15:32:20 by yjung            ###   ########.fr       */
+/*   Updated: 2021/03/29 19:25:19 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_write_test(void);
 ssize_t	ft_read(int fd, const char *buf, size_t count);
 void	ft_read_test(void);
 
-// char	*ft_strdup(const char *s1);
-// void	ft_strdup_test(void);
+char	*ft_strdup(const char *s1);
+void	ft_strdup_test(void);
 
 #endif

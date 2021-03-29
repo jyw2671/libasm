@@ -1,11 +1,12 @@
 section .text
     global _ft_read
     extern ___error
+; ssize_t	ft_read(int fd, const char *buf, size_t count);
 ; 프로토타입은 (fd == rdi, buf == rsi, size == rdx) 전달되어서 MOV 안 해줘도 됨
 
 _ft_read:
     mov     rax, 0x02000003 ; 0x02000003 -> read()
-    syscall                 ; syscall시 write가 정상적으로 된다
+    syscall                 ; syscall시 read가 정상적으로 된다
     jc      error           ; 만약 에러 상황 발생시 carry비트가 1이 되면서 error로 넘어감
     ret                     ; 정상적인 종료
 

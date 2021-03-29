@@ -6,7 +6,7 @@
 #    By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 16:48:15 by yjung             #+#    #+#              #
-#    Updated: 2021/03/24 22:33:43 by yjung            ###   ########.fr        #
+#    Updated: 2021/03/29 23:05:00 by yjung            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,12 +44,12 @@ $(NAME) : $(OBJS)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 
 clean :
-	$(RM) $(OBJS)
+	$(RM) $(RMFLAGS) $(OBJS)
 	rm -rf $(OBJ_DIR)
 
 fclean : clean
-	$(RM) $(NAME)
-	@rm a.out
+	$(RM) $(RMFLAGS) $(NAME)
+	@rm -rf a.out
 
 #bonus : $(NAME)
 
@@ -71,6 +71,6 @@ test : $(NAME) $(TEST_OBJS)
 
 test_clean : fclean
 	$(RM) $(RMFLAGS) $(TEST_OBJ_DIR)
-	@rm a.out
+	@rm -rf a.out
 
 .PHONY: all clean fclean re test test_clean
